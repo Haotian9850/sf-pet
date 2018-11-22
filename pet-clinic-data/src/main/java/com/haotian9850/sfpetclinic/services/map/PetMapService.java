@@ -3,11 +3,13 @@ package com.haotian9850.sfpetclinic.services.map;
 import com.haotian9850.sfpetclinic.model.Pet;
 import com.haotian9850.sfpetclinic.services.CrudService;
 import com.haotian9850.sfpetclinic.services.PetService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})    //profile can be an array, OR relationship
 public class PetMapService extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Set<Pet> findAll() {

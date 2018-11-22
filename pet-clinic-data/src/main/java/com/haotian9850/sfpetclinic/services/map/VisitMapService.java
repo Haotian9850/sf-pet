@@ -2,10 +2,14 @@ package com.haotian9850.sfpetclinic.services.map;
 
 import com.haotian9850.sfpetclinic.model.Visit;
 import com.haotian9850.sfpetclinic.services.VisitService;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
 
 import java.awt.image.VolatileImage;
 import java.util.Set;
 
+@Service
+@Profile({"default", "map"})    //profile can be an array, OR relationship
 public class VisitMapService extends AbstractMapService<Visit, Long> implements VisitService {
 
     @Override
@@ -25,7 +29,8 @@ public class VisitMapService extends AbstractMapService<Visit, Long> implements 
 
     @Override
     public Visit save(Visit visit) {
-        if(visit.getPet() == null || visit.getPet().getOwner() == null || visit.getPet().getId() == null || visit.getPet().getOwner() == null){
+        if(visit.getPet() == null || visit.getPet().getOwner() == null ||
+                visit.getPet().getId() == null || visit.getPet().getOwner() == null){
             throw new RuntimeException("Invalid visit!");
         }
         return null;

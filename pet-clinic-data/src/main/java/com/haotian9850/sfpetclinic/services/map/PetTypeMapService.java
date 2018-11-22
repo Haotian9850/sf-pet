@@ -2,11 +2,13 @@ package com.haotian9850.sfpetclinic.services.map;
 
 import com.haotian9850.sfpetclinic.model.PetType;
 import com.haotian9850.sfpetclinic.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})    //profile can be an array, OR relationship
 public class PetTypeMapService extends AbstractMapService<PetType, Long> implements PetTypeService {
 
     @Override

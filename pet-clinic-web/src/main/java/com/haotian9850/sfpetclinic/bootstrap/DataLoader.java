@@ -1,10 +1,7 @@
 package com.haotian9850.sfpetclinic.bootstrap;
 
 import com.haotian9850.sfpetclinic.model.*;
-import com.haotian9850.sfpetclinic.services.OwnerService;
-import com.haotian9850.sfpetclinic.services.PetTypeService;
-import com.haotian9850.sfpetclinic.services.SpecialtyService;
-import com.haotian9850.sfpetclinic.services.VetService;
+import com.haotian9850.sfpetclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +14,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService){
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService, VisitService visitService){
         this.ownerService = ownerService;   //using the interface
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -89,6 +88,15 @@ public class DataLoader implements CommandLineRunner {
         owner2.getPets().add(fionasCat);
 
         ownerService.save(owner2);
+
+
+        //add visit
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasCat);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Crazy kitty...no cure!");
+
+        visitService.save(catVisit);
 
         Owner owner3 = new Owner();
         owner3.setFirstName("Sam");
